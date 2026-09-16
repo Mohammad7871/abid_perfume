@@ -197,13 +197,15 @@
       .brand-mark {
         display: grid;
         place-items: center;
-        width: 30px;
-        height: 30px;
+        width: 42px;
+        height: 42px;
         border-radius: 50%;
         background: linear-gradient(135deg, var(--gold-soft), var(--gold));
         color: #0b0b0b;
         font-family: "Playfair Display", serif;
         font-weight: 700;
+        font-size: 1.3rem;
+        box-shadow: 0 4px 12px rgba(217, 165, 43, 0.3);
       }
 
       .brand-name {
@@ -629,9 +631,7 @@
       .product-card {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        min-height: 350px;
-        padding: 18px 18px 20px;
+        overflow: hidden;
         border-radius: 28px;
         background: linear-gradient(
           180deg,
@@ -640,6 +640,113 @@
         );
         border: 1px solid rgba(255, 255, 255, 0.06);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.32);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+        border-color: rgba(217, 165, 43, 0.2);
+      }
+
+      .product-gallery {
+        width: 100%;
+        height: 280px;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .gallery-main {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      .gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .gallery-image.active {
+        opacity: 1;
+      }
+
+      .gallery-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(4px);
+      }
+
+      .gallery-nav:hover {
+        background: rgba(217, 165, 43, 0.8);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .gallery-prev {
+        left: 8px;
+      }
+
+      .gallery-next {
+        right: 8px;
+      }
+
+      .gallery-dots {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+      }
+
+      .gallery-dot {
+        width: 8px;
+        height: 8px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .gallery-dot:hover {
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .gallery-dot.active {
+        background: var(--gold);
+        width: 24px;
+        border-radius: 4px;
+      }
+
+      .product-content {
+        padding: 24px 20px 28px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
       }
 
       .product-head {
@@ -647,7 +754,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-        margin-bottom: 18px;
+        margin-bottom: 12px;
       }
 
       .category {
@@ -672,32 +779,39 @@
       }
 
       .product-card h3 {
-        margin: 0;
-        font-size: clamp(2.1rem, 3vw, 4rem);
-        letter-spacing: -0.06em;
-        line-height: 0.9;
+        margin: 0 0 16px;
+        font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+        letter-spacing: -0.04em;
+        line-height: 1.1;
       }
 
       .note-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 22px;
+        gap: 10px;
+        margin-bottom: 24px;
       }
 
       .note-pill {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 105px;
-        height: 44px;
-        padding: 0 18px;
+        min-width: 90px;
+        height: 38px;
+        padding: 0 16px;
         border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
         color: rgba(255, 255, 255, 0.9);
         font-weight: 500;
-        font-size: 0.95rem;
+        font-size: 0.88rem;
+        transition: all 0.2s ease;
+      }
+
+      .note-pill:hover {
+        background: rgba(217, 165, 43, 0.15);
+        border-color: rgba(217, 165, 43, 0.3);
+        color: var(--gold-soft);
       }
 
       .product-btn {
@@ -705,18 +819,25 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
-        margin-top: 28px;
+        margin-top: auto;
         width: 100%;
-        min-height: 64px;
-        font-size: 1.9rem;
+        min-height: 56px;
+        font-size: 1rem;
+        font-weight: 700;
         border: 0;
         cursor: pointer;
         border-radius: 999px;
-        padding: 0 18px;
+        padding: 0 24px;
+        transition: all 0.3s ease;
+      }
+
+      .product-card:hover .product-btn {
+        transform: scale(1.02);
+        box-shadow: 0 8px 20px rgba(217, 165, 43, 0.25);
       }
 
       .cart-icon {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         line-height: 1;
       }
 
@@ -973,6 +1094,32 @@
         color: var(--gold-soft);
       }
 
+      .social-icons {
+        display: flex;
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .social-icons a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.3s ease;
+      }
+
+      .social-icons a:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #0b0b0b;
+        transform: translateY(-3px);
+      }
+
       .footer-links {
         display: grid;
         grid-template-columns: repeat(2, minmax(180px, 1fr));
@@ -1034,6 +1181,269 @@
         color: var(--gold-soft);
       }
 
+      /* Product Modal Styles */
+      .product-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .product-modal.active {
+        display: flex;
+      }
+
+      .modal-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+      }
+
+      .modal-content {
+        position: relative;
+        width: min(1200px, calc(100% - 32px));
+        max-height: 90vh;
+        background: linear-gradient(180deg, rgba(13, 13, 13, 0.98), rgba(5, 5, 5, 0.99));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+        animation: modalSlideIn 0.3s ease;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .modal-close:hover {
+        background: var(--gold);
+        color: #0b0b0b;
+        transform: rotate(90deg);
+      }
+
+      .modal-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-gallery {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-gallery-main {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      .modal-gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .modal-gallery-image.active {
+        opacity: 1;
+      }
+
+      .modal-gallery-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(4px);
+      }
+
+      .modal-gallery-nav:hover {
+        background: var(--gold);
+        color: #0b0b0b;
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .modal-prev {
+        left: 16px;
+      }
+
+      .modal-next {
+        right: 16px;
+      }
+
+      .modal-gallery-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+      }
+
+      .modal-gallery-dot {
+        width: 10px;
+        height: 10px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .modal-gallery-dot:hover {
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .modal-gallery-dot.active {
+        background: var(--gold);
+        width: 32px;
+        border-radius: 5px;
+      }
+
+      .modal-details {
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-category {
+        color: var(--gold);
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      .modal-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2.8rem;
+        margin: 0 0 16px;
+        line-height: 1.1;
+      }
+
+      .modal-rating {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--gold-soft);
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .modal-description {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .modal-notes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+
+      .modal-notes span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 100px;
+        height: 40px;
+        padding: 0 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      .modal-price {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+        padding: 20px;
+        background: rgba(217, 165, 43, 0.08);
+        border: 1px solid rgba(217, 165, 43, 0.2);
+        border-radius: 16px;
+      }
+
+      .price-label {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .price-value {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: var(--gold-soft);
+        font-weight: 700;
+      }
+
+      .modal-add-btn {
+        width: 100%;
+        min-height: 64px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-top: auto;
+      }
+
       @media (max-width: 960px) {
         .hero-inner,
         .benefit-wrap,
@@ -1075,6 +1485,18 @@
         .product-grid,
         .feature-grid {
           grid-template-columns: 1fr;
+        }
+        .modal-body {
+          grid-template-columns: 1fr;
+        }
+        .modal-gallery {
+          height: 350px;
+        }
+        .modal-details {
+          padding: 24px;
+        }
+        .modal-title {
+          font-size: 2rem;
         }
         .brand-strip-inner {
           gap: 18px;
@@ -1263,64 +1685,115 @@
 
           <div class="product-grid">
             <article class="product-card">
-              <div>
+              <div class="product-gallery">
+                <button class="gallery-nav gallery-prev" type="button" aria-label="Previous image">‹</button>
+                <div class="gallery-main">
+                  <img class="gallery-image active" src="images/perfume-bottle-1.jpg" alt="Noir Essence Perfume - Front view" />
+                  <img class="gallery-image" src="images/perfume-bottle-1.jpg" alt="Noir Essence Perfume - Side view" />
+                  <img class="gallery-image" src="images/perfume-bottle-1.jpg" alt="Noir Essence Perfume - Back view" />
+                  <img class="gallery-image" src="images/perfume-bottle-1.jpg" alt="Noir Essence Perfume - Detail view" />
+                  <img class="gallery-image" src="images/perfume-bottle-1.jpg" alt="Noir Essence Perfume - Cap view" />
+                  <img class="gallery-image" src="images/perfume-bottle-1.jpg" alt="Noir Essence Perfume - Box view" />
+                </div>
+                <button class="gallery-nav gallery-next" type="button" aria-label="Next image">›</button>
+                <div class="gallery-dots">
+                  <button class="gallery-dot active" data-index="0" type="button" aria-label="Image 1"></button>
+                  <button class="gallery-dot" data-index="1" type="button" aria-label="Image 2"></button>
+                  <button class="gallery-dot" data-index="2" type="button" aria-label="Image 3"></button>
+                  <button class="gallery-dot" data-index="3" type="button" aria-label="Image 4"></button>
+                  <button class="gallery-dot" data-index="4" type="button" aria-label="Image 5"></button>
+                  <button class="gallery-dot" data-index="5" type="button" aria-label="Image 6"></button>
+                </div>
+              </div>
+              <div class="product-content">
                 <div class="product-head">
                   <span class="category">Eau de Parfum</span>
                   <span class="rating">★ 4.9 <small>(2340)</small></span>
                 </div>
                 <h3>Noir Essence</h3>
-              </div>
-
-              <div>
                 <div class="note-list">
                   <span class="note-pill">Oud</span>
                   <span class="note-pill">Black Pepper</span>
                   <span class="note-pill">Amber</span>
                 </div>
                 <button class="primary-btn product-btn" type="button">
-                  <span class="cart-icon">🛒</span> Add
+                  <span class="cart-icon">🛒</span> Add to Cart
                 </button>
               </div>
             </article>
 
             <article class="product-card">
-              <div>
+              <div class="product-gallery">
+                <button class="gallery-nav gallery-prev" type="button" aria-label="Previous image">‹</button>
+                <div class="gallery-main">
+                  <img class="gallery-image active" src="images/perfume-bottle-2.jpg" alt="Azure Spirit Perfume - Front view" />
+                  <img class="gallery-image" src="images/perfume-bottle-2.jpg" alt="Azure Spirit Perfume - Side view" />
+                  <img class="gallery-image" src="images/perfume-bottle-2.jpg" alt="Azure Spirit Perfume - Back view" />
+                  <img class="gallery-image" src="images/perfume-bottle-2.jpg" alt="Azure Spirit Perfume - Detail view" />
+                  <img class="gallery-image" src="images/perfume-bottle-2.jpg" alt="Azure Spirit Perfume - Cap view" />
+                  <img class="gallery-image" src="images/perfume-bottle-2.jpg" alt="Azure Spirit Perfume - Box view" />
+                </div>
+                <button class="gallery-nav gallery-next" type="button" aria-label="Next image">›</button>
+                <div class="gallery-dots">
+                  <button class="gallery-dot active" data-index="0" type="button" aria-label="Image 1"></button>
+                  <button class="gallery-dot" data-index="1" type="button" aria-label="Image 2"></button>
+                  <button class="gallery-dot" data-index="2" type="button" aria-label="Image 3"></button>
+                  <button class="gallery-dot" data-index="3" type="button" aria-label="Image 4"></button>
+                  <button class="gallery-dot" data-index="4" type="button" aria-label="Image 5"></button>
+                  <button class="gallery-dot" data-index="5" type="button" aria-label="Image 6"></button>
+                </div>
+              </div>
+              <div class="product-content">
                 <div class="product-head">
                   <span class="category">Eau de Toilette</span>
                   <span class="rating">★ 4.8 <small>(1850)</small></span>
                 </div>
                 <h3>Azure Spirit</h3>
-              </div>
-
-              <div>
                 <div class="note-list">
                   <span class="note-pill">Marine</span>
                   <span class="note-pill">Bergamot</span>
                   <span class="note-pill">Sandalwood</span>
                 </div>
                 <button class="primary-btn product-btn" type="button">
-                  <span class="cart-icon">🛒</span> Add
+                  <span class="cart-icon">🛒</span> Add to Cart
                 </button>
               </div>
             </article>
 
             <article class="product-card">
-              <div>
+              <div class="product-gallery">
+                <button class="gallery-nav gallery-prev" type="button" aria-label="Previous image">‹</button>
+                <div class="gallery-main">
+                  <img class="gallery-image active" src="images/perfume-bottle-3.jpg" alt="Heritage Gold Perfume - Front view" />
+                  <img class="gallery-image" src="images/perfume-bottle-3.jpg" alt="Heritage Gold Perfume - Side view" />
+                  <img class="gallery-image" src="images/perfume-bottle-3.jpg" alt="Heritage Gold Perfume - Back view" />
+                  <img class="gallery-image" src="images/perfume-bottle-3.jpg" alt="Heritage Gold Perfume - Detail view" />
+                  <img class="gallery-image" src="images/perfume-bottle-3.jpg" alt="Heritage Gold Perfume - Cap view" />
+                  <img class="gallery-image" src="images/perfume-bottle-3.jpg" alt="Heritage Gold Perfume - Box view" />
+                </div>
+                <button class="gallery-nav gallery-next" type="button" aria-label="Next image">›</button>
+                <div class="gallery-dots">
+                  <button class="gallery-dot active" data-index="0" type="button" aria-label="Image 1"></button>
+                  <button class="gallery-dot" data-index="1" type="button" aria-label="Image 2"></button>
+                  <button class="gallery-dot" data-index="2" type="button" aria-label="Image 3"></button>
+                  <button class="gallery-dot" data-index="3" type="button" aria-label="Image 4"></button>
+                  <button class="gallery-dot" data-index="4" type="button" aria-label="Image 5"></button>
+                  <button class="gallery-dot" data-index="5" type="button" aria-label="Image 6"></button>
+                </div>
+              </div>
+              <div class="product-content">
                 <div class="product-head">
                   <span class="category">Parfum Intense</span>
                   <span class="rating">★ 5.0 <small>(980)</small></span>
                 </div>
                 <h3>Heritage Gold</h3>
-              </div>
-
-              <div>
                 <div class="note-list">
                   <span class="note-pill">Saffron</span>
                   <span class="note-pill">Leather</span>
                   <span class="note-pill">Musk</span>
                 </div>
                 <button class="primary-btn product-btn" type="button">
-                  <span class="cart-icon">🛒</span> Add
+                  <span class="cart-icon">🛒</span> Add to Cart
                 </button>
               </div>
             </article>
@@ -1509,7 +1982,23 @@
             Premium fragrances crafted for the modern man. Bold, refined,
             unmistakable.
           </p>
-          <div class="footer-whatsapp">💬 Chat on WhatsApp</div>
+          <div class="social-icons">
+            <a href="https://instagram.com/abidfragrances" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com/abidfragrances" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="https://wa.me/18001234567" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </a>
+          </div>
         </div>
 
         <div class="footer-links">
@@ -1539,6 +2028,54 @@
         </div>
       </div>
     </footer>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="product-modal">
+      <div class="modal-overlay" onclick="closeModal()"></div>
+      <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close modal">×</button>
+        <div class="modal-body">
+          <div class="modal-gallery">
+            <button class="modal-gallery-nav modal-prev" type="button" aria-label="Previous image">‹</button>
+            <div class="modal-gallery-main">
+              <img class="modal-gallery-image active" id="modalMainImage" src="" alt="" />
+              <img class="modal-gallery-image" id="modalMainImage2" src="" alt="" />
+              <img class="modal-gallery-image" id="modalMainImage3" src="" alt="" />
+              <img class="modal-gallery-image" id="modalMainImage4" src="" alt="" />
+              <img class="modal-gallery-image" id="modalMainImage5" src="" alt="" />
+              <img class="modal-gallery-image" id="modalMainImage6" src="" alt="" />
+              <img class="modal-gallery-image" id="modalMainImage7" src="" alt="" />
+              <img class="modal-gallery-image" id="modalMainImage8" src="" alt="" />
+            </div>
+            <button class="modal-gallery-nav modal-next" type="button" aria-label="Next image">›</button>
+            <div class="modal-gallery-dots">
+              <button class="modal-gallery-dot active" data-index="0" type="button"></button>
+              <button class="modal-gallery-dot" data-index="1" type="button"></button>
+              <button class="modal-gallery-dot" data-index="2" type="button"></button>
+              <button class="modal-gallery-dot" data-index="3" type="button"></button>
+              <button class="modal-gallery-dot" data-index="4" type="button"></button>
+              <button class="modal-gallery-dot" data-index="5" type="button"></button>
+              <button class="modal-gallery-dot" data-index="6" type="button"></button>
+              <button class="modal-gallery-dot" data-index="7" type="button"></button>
+            </div>
+          </div>
+          <div class="modal-details">
+            <span class="modal-category" id="modalCategory"></span>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <div class="modal-rating" id="modalRating"></div>
+            <p class="modal-description" id="modalDescription"></p>
+            <div class="modal-notes" id="modalNotes"></div>
+            <div class="modal-price">
+              <span class="price-label">Price:</span>
+              <span class="price-value" id="modalPrice"></span>
+            </div>
+            <button class="primary-btn modal-add-btn" type="button">
+              <span class="cart-icon">🛒</span> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
       const menuToggle = document.querySelector(".menu-toggle");
@@ -1600,6 +2137,195 @@
         currentSlide = (currentSlide + 1) % testimonialData.length;
         renderSlide(currentSlide);
       }, 5000);
+
+      // Product Image Gallery Functionality
+      const productGalleries = document.querySelectorAll(".product-gallery");
+
+      productGalleries.forEach((gallery) => {
+        const images = gallery.querySelectorAll(".gallery-image");
+        const prevBtn = gallery.querySelector(".gallery-prev");
+        const nextBtn = gallery.querySelector(".gallery-next");
+        const dots = gallery.querySelectorAll(".gallery-dot");
+        let currentIndex = 0;
+
+        function showImage(index) {
+          images.forEach((img, i) => {
+            img.classList.toggle("active", i === index);
+          });
+          dots.forEach((dot, i) => {
+            dot.classList.toggle("active", i === index);
+          });
+          currentIndex = index;
+        }
+
+        prevBtn.addEventListener("click", () => {
+          const newIndex = (currentIndex - 1 + images.length) % images.length;
+          showImage(newIndex);
+        });
+
+        nextBtn.addEventListener("click", () => {
+          const newIndex = (currentIndex + 1) % images.length;
+          showImage(newIndex);
+        });
+
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            showImage(index);
+          });
+        });
+
+        // Auto-rotate gallery every 4 seconds
+        setInterval(() => {
+          const newIndex = (currentIndex + 1) % images.length;
+          showImage(newIndex);
+        }, 4000);
+      });
+
+      // Product Modal Functionality
+      const productModal = document.getElementById("productModal");
+      const modalImages = document.querySelectorAll(".modal-gallery-image");
+      const modalPrevBtn = document.querySelector(".modal-prev");
+      const modalNextBtn = document.querySelector(".modal-next");
+      const modalDots = document.querySelectorAll(".modal-gallery-dot");
+      let modalCurrentIndex = 0;
+
+      // Product data
+      const products = {
+        "noir-essence": {
+          category: "Eau de Parfum",
+          title: "Noir Essence",
+          rating: "★ 4.9 (2340 reviews)",
+          description: "A bold and sophisticated fragrance featuring rich oud, spicy black pepper, and warm amber notes. Perfect for the modern man who commands attention.",
+          notes: ["Oud", "Black Pepper", "Amber"],
+          price: "AED 450",
+          images: [
+            "images/perfume-bottle-1.jpg",
+            "images/perfume-bottle-1.jpg",
+            "images/perfume-bottle-1.jpg",
+            "images/perfume-bottle-1.jpg",
+            "images/perfume-bottle-1.jpg",
+            "images/perfume-bottle-1.jpg",
+            "images/perfume-bottle-1.jpg",
+            "images/perfume-bottle-1.jpg"
+          ]
+        },
+        "azure-spirit": {
+          category: "Eau de Toilette",
+          title: "Azure Spirit",
+          rating: "★ 4.8 (1850 reviews)",
+          description: "A fresh and invigorating scent combining marine notes, bright bergamot, and smooth sandalwood. Ideal for daily wear and confident moments.",
+          notes: ["Marine", "Bergamot", "Sandalwood"],
+          price: "AED 380",
+          images: [
+            "images/perfume-bottle-2.jpg",
+            "images/perfume-bottle-2.jpg",
+            "images/perfume-bottle-2.jpg",
+            "images/perfume-bottle-2.jpg",
+            "images/perfume-bottle-2.jpg",
+            "images/perfume-bottle-2.jpg",
+            "images/perfume-bottle-2.jpg",
+            "images/perfume-bottle-2.jpg"
+          ]
+        },
+        "heritage-gold": {
+          category: "Parfum Intense",
+          title: "Heritage Gold",
+          rating: "★ 5.0 (980 reviews)",
+          description: "A luxurious and refined fragrance with exotic saffron, rich leather, and sensual musk. The ultimate statement of elegance and prestige.",
+          notes: ["Saffron", "Leather", "Musk"],
+          price: "AED 520",
+          images: [
+            "images/perfume-bottle-3.jpg",
+            "images/perfume-bottle-3.jpg",
+            "images/perfume-bottle-3.jpg",
+            "images/perfume-bottle-3.jpg",
+            "images/perfume-bottle-3.jpg",
+            "images/perfume-bottle-3.jpg",
+            "images/perfume-bottle-3.jpg",
+            "images/perfume-bottle-3.jpg"
+          ]
+        }
+      };
+
+      function openModal(productId) {
+        const product = products[productId];
+        if (!product) return;
+
+        // Update modal content
+        document.getElementById("modalCategory").textContent = product.category;
+        document.getElementById("modalTitle").textContent = product.title;
+        document.getElementById("modalRating").textContent = product.rating;
+        document.getElementById("modalDescription").textContent = product.description;
+        document.getElementById("modalPrice").textContent = product.price;
+
+        // Update notes
+        const notesContainer = document.getElementById("modalNotes");
+        notesContainer.innerHTML = product.notes.map(note => `<span>${note}</span>`).join("");
+
+        // Update images
+        modalImages.forEach((img, index) => {
+          img.src = product.images[index];
+          img.alt = `${product.title} - View ${index + 1}`;
+        });
+
+        // Reset gallery
+        modalCurrentIndex = 0;
+        showModalImage(0);
+
+        // Show modal
+        productModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        productModal.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      function showModalImage(index) {
+        modalImages.forEach((img, i) => {
+          img.classList.toggle("active", i === index);
+        });
+        modalDots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === index);
+        });
+        modalCurrentIndex = index;
+      }
+
+      modalPrevBtn.addEventListener("click", () => {
+        const newIndex = (modalCurrentIndex - 1 + modalImages.length) % modalImages.length;
+        showModalImage(newIndex);
+      });
+
+      modalNextBtn.addEventListener("click", () => {
+        const newIndex = (modalCurrentIndex + 1) % modalImages.length;
+        showModalImage(newIndex);
+      });
+
+      modalDots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          showModalImage(index);
+        });
+      });
+
+      // Close modal on escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && productModal.classList.contains("active")) {
+          closeModal();
+        }
+      });
+
+      // Make product cards clickable
+      document.querySelectorAll(".product-card").forEach((card, index) => {
+        card.style.cursor = "pointer";
+        card.addEventListener("click", (e) => {
+          // Don't open modal if clicking the add to cart button
+          if (e.target.closest(".product-btn")) return;
+          
+          const productIds = ["noir-essence", "azure-spirit", "heritage-gold"];
+          openModal(productIds[index]);
+        });
+      });
     </script>
   </body>
 </html>
