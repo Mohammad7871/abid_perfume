@@ -6,11 +6,16 @@ function BrandIcon({ label }: { label: string }) {
       <svg
         viewBox="0 0 24 24"
         aria-hidden="true"
-        className="h-[18px] w-[18px] fill-none stroke-current stroke-[1.8]"
+        className="h-[18px] w-[18px] fill-none stroke-current stroke-[1.7]"
       >
-        <rect x="3" y="3" width="18" height="18" rx="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="1" className="fill-current stroke-none" />
+        <rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5.25" />
+        <circle cx="12" cy="12" r="4.3" />
+        <circle
+          cx="17.6"
+          cy="6.4"
+          r="1.2"
+          className="fill-current stroke-none"
+        />
       </svg>
     );
   }
@@ -87,8 +92,6 @@ export default function Footer() {
                 <a
                   key={label}
                   href={href}
-                  target="_blank"
-                  rel="noreferrer"
                   className="soft-social flex h-10 w-10 items-center justify-center rounded-xl glass text-noir-400 hover:border-gold-500/30 hover:text-gold-400"
                   aria-label={`Visit ABID on ${label}`}
                   title={label}
